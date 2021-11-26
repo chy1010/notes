@@ -42,6 +42,9 @@ if __name__ == '__main__':
                                                    batch_size=64,
                                                    shuffle=True)
 
+    test_dataset = datasets.MNIST(root='~/.cache/torch/data/', download=True, train=False, transform=transform)
+    test_dataloader = torch.utils.data.DataLoader(dataset=test_dataset, shuffle=True)
+
     # usage of sampler
     # train_dataset = datasets.MNIST(root='~/.cache/torch/data/', download=True, train=True, transform=transform)
     # indices = torch.randperm(len(train_dataset))[:5]
@@ -90,3 +93,16 @@ if __name__ == '__main__':
         print(
             f'[Epoch {epoch+1:03d}] total_train_loss: {total_loss: 9.4f}; training accuracy: {100*correct/num_train_data:5.2f}%'
         )
+
+
+    model.eval()
+    test_data = next(iter(test_dataloader))[0]
+    X, label = test_data
+    X_in = X.float() / 255
+    recovered_X, prediciton = model(X_in)
+    rec_X = recovered_X.numpy() * 255
+    rec_X = rec_X.astype(np.uint8)
+
+    import cv2
+    cv2.imwrite('temp/X.png', X.numpy())
+    cv2.imwrite('temp/rec_X.png', rec_X)
