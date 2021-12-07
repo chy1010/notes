@@ -124,7 +124,7 @@ def multi_bboxes_iou(box1: np.ndarray, box2: np.ndarray, format: str = 'xyxy'):
 
 
 # from numpy.random import default_rng
-def generate_xyxy(low=0, high=101, format="xyxy"):
+def generate_bbox(low=0, high=101, format="xyxy"):
     # numpy.random.Generator.choice() is available for numpy v1.17
     # rng = default_rng()
     # pairs = [sorted( rng.choice(range(low,high), 2, replace=False)  ) for _ in range(2)]
@@ -185,8 +185,8 @@ if __name__ == '__main__':
                number=number)
     print(f"It takes {t:.4f} seconds to generate {number} bboxes.")
 
-    bboxes_1 = [generate_xyxy(format=format) for _ in range(50)]
-    bboxes_2 = [generate_xyxy(format=format) for _ in range(50)]
+    bboxes_1 = [generate_bbox(format=format) for _ in range(50)]
+    bboxes_2 = [generate_bbox(format=format) for _ in range(50)]
 
     def test_time_bbox_iou():
         i, j = np.random.randint(0, 50, size=(2, ))
