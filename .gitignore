@@ -1,1 +1,7 @@
+.vscode/*
+
+*.pyc
+*.ipynb
+
 temp/*
+test/*
