@@ -6,14 +6,14 @@ import os
 print(f'os.SEEK_END: {os.SEEK_END}')
 
 # see the contents of the file
-with open('python-hacks/test-file/text.txt') as fp:
+with open('data/simple-num-seq.txt') as fp:
     contents = fp.read()
     print('CONTENTS:')
     print('-' * 30)
     print(contents)
     print('-' * 30)
 
-with open('python-hacks/test-file/text.txt') as fp:
+with open('data/simple-num-seq.txt') as fp:
 
     # Usage of os.SEEK_END: Move the cursor to the EOF (end of file).
     # In this case, offset must be set to 0.

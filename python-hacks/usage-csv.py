@@ -1,7 +1,7 @@
 from csv import Sniffer
 import csv
 
-with open('python-hacks/test-file/text.txt') as fp:
+with open('data/simple-num-seq.txt') as fp:
 
     fp.seek(0, 2)
     # check if the document is empty

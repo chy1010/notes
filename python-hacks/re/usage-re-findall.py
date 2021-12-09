@@ -1,7 +1,7 @@
 import re
 
 
-with open('python-hacks/re/data/fake-log.txt', mode='r') as fp:
+with open('data/fake-training-log.txt', mode='r') as fp:
     log_data = fp.read().splitlines()
 
 # find only train loss or valid loss

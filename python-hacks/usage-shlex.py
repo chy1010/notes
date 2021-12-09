@@ -6,7 +6,7 @@ import shlex
 
 # use shlex.shlex() to separate contents with quotation marks ' & "
 
-with open('python-hacks/test-file/shlex-example.txt', mode='r') as fp:
+with open('data/shlex-example.txt', mode='r') as fp:
     text = fp.read()
 
 rets = shlex.shlex(text)
