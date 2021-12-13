@@ -30,9 +30,8 @@ The row movement can be prefixed by a number:
 - `0`, `^`: move to the beginning of the line
 - `$`: move to the end of the line
 
-## enter other modes:
 
-### insert mode
+## enter insert mode
 
 - `i`: insert mode
 - `a`: move the cursor after the current charater and enter insert mode
@@ -42,9 +41,25 @@ The row movement can be prefixed by a number:
 - `A`: moves the cursor to the end of the line and enters insert mode
 - `O`: inserts a new line above the current one and enters insert mode on the new line
 
+## enter search mode
+
+- `/`: use regular expression and enter into the search mode
+    * `n`: in search mode, go to the next target
+    * `N`: in serach mode, go back to the previous
+
+
 ### enter visual mode
 - `v`: visual mode
 
 ### enter command mode
 
 - `:`: enter command mode
+
+
+
+### delete mode
+
+- `d`: enter delete mode, and press the following key:
+    - `d`: delete the line that the cursor at.
+    - `$`: delete the rest part after the cursor of the same line.
+    - `0` or `^`: delete the part from the beginning of the line to the position at which the cursor is.
