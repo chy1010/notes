@@ -1,4 +1,6 @@
 from collections import defaultdict
+from pathlib import Path
+from pprint import pprint
 
 # may refer: https://realpython.com/python-defaultdict/
 
@@ -55,6 +57,20 @@ def main():
     print(food['apple'])
 
     print(food['banana'])
+
+
+    test_txt_files = Path('data').rglob('*.txt')
+    char_stats = defaultdict(lambda: defaultdict(int))
+
+    for file in test_txt_files:
+        with open(file) as fp:
+            contents = fp.read().splitlines()
+        for cnt in contents:
+            for char in cnt:
+                char_stats[file.stem][char]+=1
+                
+    pprint(dict(char_stats))
+
 
 
 if __name__ == '__main__':
