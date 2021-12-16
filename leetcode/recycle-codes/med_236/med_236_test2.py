@@ -21,42 +21,58 @@ class TreeNode:
 
 class Solution:
     def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
-        path_1 = [node.val for node in self.path_to_p(root, p)]
-        if isinstance(q, int):
-            q = TreeNode(q)
-        while q.val not in path_1:
+        if isinstance(p, int): p = TreeNode(p)
+        if isinstance(q, int): q = TreeNode(q)
+        root = self.clean_structure(root)
+        path_p = []
+        while p.val != root.val:
+            path_p.append(p.val)
+            p = self.ancestor_of_p(root, p)
+        path_p.append(root.val)
+        while q.val not in path_p:
             q = self.ancestor_of_p(root, q)
         return q
 
-    def path_to_p(self, root: TreeNode, p: TreeNode):
-        if isinstance(p, int):
-            p = TreeNode(p)
-        path = []
-        while p.val != root.val:
-            path.append(p)
-            p = self.ancestor_of_p(root, p)
-        path.append(root)
-        return path
-        
-        # if p.val == root.val:
-        #     return [root]
-        # else:
-        #     ancestor = self.ancestor_of_p(root, p)
-        #     return [*self.path_to_p(root, ancestor), p]
+    def clean_structure(self, p: TreeNode):
+        if p.left is None and p.right is not None:
+            p = self.clean_structure(p.right)
+        elif p.right is None and p.left is not None:
+            p = self.clean_structure(p.left)
+        elif p.left is None and p.right is None:
+            return p
+        else:
+            p.left = self.clean_structure(p.left)
+            p.right = self.clean_structure(p.right)
+        return p
 
     @staticmethod
     def ancestor_of_p(root: TreeNode, p: TreeNode):
         this_level = [root]
         while len(this_level) > 0:
             for node in this_level:
-                # if node is None:
-                #     continue
                 if (node.left is not None and node.left.val == p.val) or (
                     node.right is not None and node.right.val == p.val):
                     return node
             next_level = [node for leaf in this_level if leaf is not None for node in (leaf.left, leaf.right) if node is not None]
             this_level = next_level
         raise 'No ancestor'
+
+    @staticmethod
+    def show_tree(p: TreeNode):
+        msg = ''
+        this_level = [p]
+        while len(this_level) > 0:
+            next_level = [node for leaf in this_level if leaf is not None for node in (leaf.left, leaf.right)]
+            for node in this_level:
+                if node is None:
+                    msg += 'x, '
+                else:
+                    msg += str(node.val) + ', '
+            if all([node is None for node in next_level]):
+                break
+            msg+='\n'
+            this_level = next_level
+        print(msg)
 
 
 class BinaryTree:
@@ -136,6 +152,14 @@ class BinaryTree:
 
 
 if __name__ == '__main__':
+
+
+    # T = BinaryTree([3,None,5,1,None,2,4])
+    # print(T)
+    # print('-=-'*30)
+    # sol = Solution()
+    # LCA = sol.lowestCommonAncestor(root=T.root, p = 5, q = 2)
+    # raise 'Stop'
 
     with open('leetcode/recycle-codes/med_236/test_data.txt') as fp:
         data = fp.read().splitlines()
