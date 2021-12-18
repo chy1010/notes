@@ -60,3 +60,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+    # how to check the data type of value?
