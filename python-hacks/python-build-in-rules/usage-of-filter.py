@@ -1,6 +1,9 @@
 import numpy as np
-from common import is_prime
 
+try:
+    from common import is_prime
+except:
+    raise ImportError('To ensure import of common functions, please execute this script in the top-level.')
 
 def main():
     numbers = np.random.randint(2, int(1e6), size=20).tolist()
