@@ -2,6 +2,13 @@
 
 Notes for coding.
 
+## import common scripts
+
+Execute the script in the top-level: for example,
+```python
+python main.py python-hacks/python-build-in-rules/usage-of-filter.py
+```
+
 ## Plan
 
 - python hacks
