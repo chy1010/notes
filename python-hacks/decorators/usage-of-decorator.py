@@ -19,6 +19,7 @@ def ordinary():
 def pretty_ordinary():
     print("I am ordinary")
 
+
 # this is equiv. to:
 # pretty_orindary = make_pretty(pretty_orindary)
 
