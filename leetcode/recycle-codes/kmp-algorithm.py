@@ -1,29 +1,37 @@
 def build_lps(pattern):
-        """ Helper function for strStr.
-        Returns longest proper suffix array for string pattern.
-        Each lps_array[i] is the length of the longest proper prefix
-        which is equal to suffix for pattern ending at character i.
-        Proper means that whole string cannot be prefix or suffix.
+    """ Helper function for strStr.
+    Returns longest proper suffix array for string pattern.
+    Each lps_array[i] is the length of the longest proper prefix
+    which is equal to suffix for pattern ending at character i.
+    Proper means that whole string cannot be prefix or suffix.
 
-        Time complexity: O(m). Space complexity: O(1), where
-        m is the length of the pattern, space used for lps array isn't included.
-        """
-        m = len(pattern)
-        lps_array = [0] * m
-        i, j = 1, 0  # start from the 2nd character in pattern
-        while i < m:
-            if pattern[i] == pattern[j]:
-                lps_array[i] = j + 1
-                j += 1
-                i += 1
+    Time complexity: O(m). Space complexity: O(1), where
+    m is the length of the pattern, space used for lps array isn't included.
+    """
+    m = len(pattern)
+    lps_array = [0] * m
+    i, j = 1, 0  # start from the 2nd character in pattern
+    while i < m:
+        if pattern[i] == pattern[j]:
+            lps_array[i] = j + 1
+            j += 1
+            i += 1
+        else:
+            if j > 0:
+                j = lps_array[j - 1]
             else:
-                if j > 0:
-                    j = lps_array[j - 1]
-                else:
-                    lps_array[i] = 0
-                    i += 1
-        return lps_array
-    
+                lps_array[i] = 0
+                i += 1
+    return lps_array
+
+def build_lps2(pat):
+    ret = [0]
+    for i in range(1, len(pat)):
+        j = ret[i-1]
+        while j > 0 and pat[i] != pat[j]:
+            j = ret[j-1]
+        ret.append(j+1 if pat[i] == pat[j] else j)
+    return ret
     
 if __name__ == '__main__':
     #          0123456789ABCD
@@ -36,7 +44,7 @@ if __name__ == '__main__':
     # the next match should begin at i+7
     
     print(build_lps(pattern))
-    
+    print(build_lps2(pattern))
     
     # import random
     # char_list = ['a', 'b', 'c', 'd']
@@ -55,8 +63,6 @@ if __name__ == '__main__':
     n = len(pattern)
     i, j = 0, 0
     lps_array = build_lps(pattern)
-    import ipdb
-    ipdb.set_trace()
     while i < m:
         # current characters match, move to the next characters
         if text[i] == pattern[j]:
