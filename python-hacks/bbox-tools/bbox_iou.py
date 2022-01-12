@@ -118,7 +118,7 @@ def multi_bboxes_iou(box1: np.ndarray, box2: np.ndarray, format: str = 'xyxy'):
         np.minimum(b1_y2, b2_y2) - np.maximum(b1_y1, b2_y1)).clip(0)
 
     # Union Area
-    union = (w1 * h1) + w2 * h2 - inter
+    union = (w1 * h1) + w2 * h2 - inter + np.finfo(float).eps
 
     return inter / union  # iou
 
