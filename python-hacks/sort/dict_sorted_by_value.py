@@ -12,3 +12,8 @@ if __name__ == '__main__':
 
     for k, v in return_sorted_by_value(scores, descending=True).items():
         print(f'{k}: {v: 3d}')
+        
+        
+    # sorted by key
+    scores = {k: scores[k] for k in sorted(scores, reverse=True)}
+    print(scores)
