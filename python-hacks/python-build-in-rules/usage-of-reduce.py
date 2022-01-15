@@ -20,6 +20,12 @@ def char2int(s: str):
 def main():
     num = reduce(fn, map(char2int, '3345678'))
     print(num)
+    
+def factorial(n):
+    return reduce(lambda a, b: a*b, range(1,n+1))
 
 if __name__ == '__main__':
     main()
+    
+    
+    print(f'5! = {factorial(5)}')
