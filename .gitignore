@@ -4,6 +4,7 @@
 *.ipynb
 
 temp/*
+ctemp/*
 test/*
 recycling/*
 leetcode/recycle-codes/*
